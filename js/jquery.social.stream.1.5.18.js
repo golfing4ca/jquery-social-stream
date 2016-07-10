@@ -46,7 +46,7 @@
 						id: '',
 						intro: 'Shared',
 						out: 'intro,thumb,title,text,share',
-						api_key: 'AIzaSyAWNgUpUj_W26tP3yev5Ysr4Zb53OIPgR4',
+						api_key: 'AIzaSyB1zptnRspzltRVLGQJMBCH2yYujYp7ytI',
 						image_height: 75,
 						image_width: 75,
 						shares: true,
