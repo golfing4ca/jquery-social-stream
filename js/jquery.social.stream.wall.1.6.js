@@ -1310,19 +1310,19 @@ function() {
     "function" == typeof define && define.amd ? define(["outlayer/outlayer", "get-size/get-size", "matches-selector/matches-selector", "isotope/js/item", "isotope/js/layout-mode", "isotope/js/layout-modes/masonry", "isotope/js/layout-modes/fit-rows", "isotope/js/layout-modes/vertical"], r) : t.Isotope = r(t.Outlayer, t.getSize, t.matchesSelector, t.Isotope.Item, t.Isotope.LayoutMode)
   }(window);
 
-function loadFN( jQuery ) {
+function loadFN( jQ$ ) {
 	
   var filters = {},
-    $container = jQuery('.stream');
+    $container = jQ$('.stream');
 
-  jQuery('.filter a').click(function() {
-    var $i = jQuery(this),
+  jQ$('.filter a').click(function() {
+    var $i = jQ$(this),
       isoFilters = [],
       prop, selector, $a = $i.parents('.dcsns-toolbar'),
       $b = $a.next(),
-      $c = jQuery('.stream', $b);
+      $c = jQ$('.stream', $b);
 
-    jQuery('.filter a', $a).removeClass('iso-active');
+    jQ$('.filter a', $a).removeClass('iso-active');
     $i.addClass('iso-active');
     filters[$i.data('group')] = $i.data('filter');
     for (prop in filters) {
@@ -1337,16 +1337,16 @@ function loadFN( jQuery ) {
     return false;
   });
 
-  jQuery.each($container, function() {
-    jQuery('li .section-thumb img, li .section-text img', jQuery(this)).css('opacity', 0).show().fadeTo(800, 1);
-    jQuery(this).isotope('layout');
+  jQ$.each($container, function() {
+    jQ$('li .section-thumb img, li .section-text img', jQ$(this)).css('opacity', 0).show().fadeTo(800, 1);
+    jQ$(this).isotope('layout');
   });
 
   function sortstream(obj, d) {
-    var $l = jQuery('li.dcsns-li', obj);
+    var $l = jQ$('li.dcsns-li', obj);
     $l.sort(function(a, b) {
-      var keyA = parseInt(jQuery(a).attr('rel'), 10),
-        keyB = parseInt(jQuery(b).attr('rel'), 10);
+      var keyA = parseInt(jQ$(a).attr('rel'), 10),
+        keyB = parseInt(jQ$(b).attr('rel'), 10);
       if (d == 'asc') {
         return (keyA > keyB) ? 1 : -1;
       } else {
@@ -1354,7 +1354,7 @@ function loadFN( jQuery ) {
       }
       return 0;
     });
-    jQuery.each($l, function(index, row) {
+    jQ$.each($l, function(index, row) {
       obj.append(row);
     });
     return;
