@@ -6,13 +6,13 @@
  *
  */
  
-(function($){
+(function(sub$, undefined) {
 
 	SocialStreamObject = function(el, options) {
 		this.create(el, options);
 	};
 	
-	$.extend(SocialStreamObject.prototype, {
+	sub$.extend(SocialStreamObject.prototype, {
 		
 		version   : '1.5.18',
 		
@@ -175,14 +175,14 @@
 				debug: false
 			};
 			
-			this.o = {}, this.timer_on = 0, this.id = 'dcsns-'+$(el).index(), this.timerId = '', this.o = $.extend(true,this.defaults,options), opt = this.o, $load = $('<div class="dcsns-loading">creating stream ...</div>');
+			this.o = {}, this.timer_on = 0, this.id = 'dcsns-'+sub$(el).index(), this.timerId = '', this.o = sub$.extend(true,this.defaults,options), opt = this.o, sub$load = sub$('<div class="dcsns-loading">creating stream ...</div>');
 			
-			$(el).addClass(this.o.container).append('<div class="'+this.o.content+'"><ul class="'+this.o.cstream+'"></ul></div>');
+			sub$(el).addClass(this.o.container).append('<div class="'+this.o.content+'"><ul class="'+this.o.cstream+'"></ul></div>');
 			
-			var $c = $('.'+this.o.content,el), $a = $('.'+this.o.cstream,el), $l = $('li',$a);
+			var sub$c = sub$('.'+this.o.content,el), sub$a = sub$('.'+this.o.cstream,el), sub$l = sub$('li',sub$a);
 
 			if(opt.height > 0 && opt.wall == false){
-				$c.css({height:opt.height+'px'});
+				sub$c.css({height:opt.height+'px'});
 			}
 
 			if(this.o.filter == true || this.o.controls == true){
@@ -191,8 +191,8 @@
 					var fclass = this.o.center == true ? 'option-set filter dc-center' : 'option-set filter';
 					x += '<ul id="dcsns-filter" class="' + fclass + '">';
 					x += this.o.wall == true ? '<li><a href="#filter" data-group="dc-filter"  data-filter="*" class="selected link-all">all</a></li>' : '' ;
-					var $f = $('.filter',el);
-					$.each(opt.feeds, function(k,v){
+					var sub$f = sub$('.filter',el);
+					sub$.each(opt.feeds, function(k,v){
 						x += v.id != '' ? '<li class="active f-'+k+'"><a href="#filter" rel="'+k+'" data-group="dc-filter" data-filter=".dcsns-'+k+'"><img src="'+opt.imagePath+opt.feeds[k].icon+'" alt="" /></a></li>' : '' ;
 					});
 					x += '</ul>';
@@ -203,43 +203,43 @@
 				}
 				x += '</div>';
 				if(opt.wall == false){
-					$(el).append(x);
+					sub$(el).append(x);
 				} else {
-					$(el).before(x);
+					sub$(el).before(x);
 				}
 			}
 			
 			if(this.o.wall == true){
-				$('.dcsns-toolbar').append($load);
-				var w = $("#dcsns-filter.dc-center").width()/2;
-				$("#dcsns-filter.dc-center").css({'margin-left': -w + "px"}).fadeIn();
-				this.createwall($a);
+				sub$('.dcsns-toolbar').append(sub$load);
+				var w = sub$("#dcsns-filter.dc-center").width()/2;
+				sub$("#dcsns-filter.dc-center").css({'margin-left': -w + "px"}).fadeIn();
+				this.createwall(sub$a);
 			} else {
-				$c.append($load);
+				sub$c.append(sub$load);
 			}
-			this.createstream(el,$a,0,opt.days);		
-			this.addevents(el,$a);		
+			this.createstream(el,sub$a,0,opt.days);		
+			this.addevents(el,sub$a);		
 			if(this.o.rotate.delay > 0){
 				this.rotate(el);
 			}
-			$load.remove();
+			sub$load.remove();
 		},
 		
 		createstream: function(obj,s,f1,f2){
-			$.each(opt.feeds, function(k,v){
+			sub$.each(opt.feeds, function(k,v){
 				if(opt.feeds[k].id != ''){
 					var txt = [];
-					$.each(opt.feeds[k].intro.split(','), function(i,v){
-						v = $.trim(v);
+					sub$.each(opt.feeds[k].intro.split(','), function(i,v){
+						v = sub$.trim(v);
 						txt.push(v);
 					});
-					$.each(opt.feeds[k].id.split(','), function(i,v){
-						v = $.trim(v);
+					sub$.each(opt.feeds[k].id.split(','), function(i,v){
+						v = sub$.trim(v);
 						if(opt.feeds[k].feed && v.split('#').length < 2){
 							if(k == 'youtube' && v.split('/').length > 1) {
 								getFeed(k,v,opt.iconPath,opt.feeds[k],obj,opt,f1,f2,'posted','',i);
 							} else {
-								$.each(opt.feeds[k].feed.split(','), function(i,feed){
+								sub$.each(opt.feeds[k].feed.split(','), function(i,feed){
 									getFeed(k,v,opt.iconPath,opt.feeds[k],obj,opt,f1,f2,txt[i],feed,i);
 								});
 							}
@@ -258,7 +258,7 @@
 					transitionDuration: opt.transition,
 					getSortData : {
 						postDate : function( itemElem ){
-							return parseInt($(itemElem).attr('rel'),10);
+							return parseInt(sub$(itemElem).attr('rel'),10);
 						}
 					},
 					sortBy : 'postDate',
@@ -268,24 +268,24 @@
 				});
 		},
 		
-		addevents: function(obj,$a){
+		addevents: function(obj,sub$a){
 			var self = this, speed = this.o.speed;
-			var $container = $('.stream',obj), filters = {}
-			$('.controls',obj).delegate('a','click',function(){
-				var x = $(this).attr('class');
+			var sub$container = sub$('.stream',obj), filters = {}
+			sub$('.controls',obj).delegate('a','click',function(){
+				var x = sub$(this).attr('class');
 				switch(x)
 				{
 					case 'prev':
 					self.pauseTimer();
-					ticker($a,'prev',speed);
+					ticker(sub$a,'prev',speed);
 					break;
 					case 'next':
 					self.pauseTimer();
-					ticker($a,'next',speed);
+					ticker(sub$a,'next',speed);
 					break;
 					case 'play':
 					self.rotate(obj);
-					$('.controls .play').removeClass('play').addClass('pause');
+					sub$('.controls .play').removeClass('play').addClass('pause');
 					break;
 					case 'pause':
 					self.pauseTimer();
@@ -293,32 +293,32 @@
 				}
 				return false;
 			});
-			$('.filter',obj).delegate('a','click',function(){
+			sub$('.filter',obj).delegate('a','click',function(){
 				if(opt.wall == false){
-					var rel = $(this).attr('rel');
-					if($(this).parent().hasClass('active')){
-						$('.dcsns-'+rel,$a).slideUp().addClass('inactive');
-						$(this).parent().animate({opacity: 0.3},400);
+					var rel = sub$(this).attr('rel');
+					if(sub$(this).parent().hasClass('active')){
+						sub$('.dcsns-'+rel,sub$a).slideUp().addClass('inactive');
+						sub$(this).parent().animate({opacity: 0.3},400);
 					} else {
-						$('.dcsns-'+rel,$a).slideDown().removeClass('inactive');
-						$(this).parent().animate({opacity: 1},400);
+						sub$('.dcsns-'+rel,sub$a).slideDown().removeClass('inactive');
+						sub$(this).parent().animate({opacity: 1},400);
 					}
-					$(this).parent().toggleClass('active');
+					sub$(this).parent().toggleClass('active');
 				}
 				return false;
 			});
 			if(this.o.external){
-				$a.delegate('a','click',function(){
-					if(!$(this).parent().hasClass('section-share')){
+				sub$a.delegate('a','click',function(){
+					if(!sub$(this).parent().hasClass('section-share')){
 						this.target = '_blank';
 					}
 				});
 			}
 		},
 		rotate: function(a){
-			var self = this, stream = $('.'+this.o.cstream,a), speed = this.o.speed, delay = this.o.rotate.delay, r = this.o.rotate.direction == 'up' ? 'prev' : 'next' ;
+			var self = this, stream = sub$('.'+this.o.cstream,a), speed = this.o.speed, delay = this.o.rotate.delay, r = this.o.rotate.direction == 'up' ? 'prev' : 'next' ;
 			this.timer_on = 1;
-			$('.controls .play').removeClass('play').addClass('pause');
+			sub$('.controls .play').removeClass('play').addClass('pause');
 			this.timerId = setTimeout(function(){
 				ticker(stream,r,speed);
 				self.rotate(a);
@@ -327,14 +327,14 @@
 		pauseTimer: function(){
 			clearTimeout(this.timerId);
 			this.timer_on = 0;
-			$('.controls .pause').removeClass('pause').addClass('play');
+			sub$('.controls .pause').removeClass('pause').addClass('play');
 		}
 	});
 	
-	$.fn.dcSocialStream = function(options, callback){
+	sub$.fn.dcSocialStream = function(options, callback){
 		var d = {};
 		this.each(function(){
-			var s = $(this);
+			var s = sub$(this);
 			d = s.data("socialtabs");
 			if (!d){
 				d = new SocialStreamObject(this, options, callback);
@@ -346,7 +346,7 @@
 	
 	function getFeed(type,id,path,o,obj,opt,f1,f2,intro,feed,fn){
 	
-		var stream = $('.stream',obj), list = [],d = '', px = 300, c = [],data, href, url, n = opt.limit, txt = [], src;
+		var stream = sub$('.stream',obj), list = [],d = '', px = 300, c = [],data, href, url, n = opt.limit, txt = [], src;
 		frl = 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num='+n+'&callback=?&q=';
 		
 		switch (type) {
@@ -551,7 +551,7 @@
 					break;
 				}
 				if(error == ''){
-					$.each(a, function(i,item){
+					sub$.each(a, function(i,item){
 						if(i < n){
 							var html = [], q = item.link, u='<a href="'+href+'">'+id+'</a>', w='', x = '<a href="'+q+'">'+item.title+'</a>', y='', z='', zz='', m='', d = item.publishedDate, sq = q, st = item.title, s = '';
 							switch(type)
@@ -590,7 +590,7 @@
 								z = '<span class="twitter-user"><a href="https://www.twitter.com/'+un+'"><strong>'+item.user.name+' </strong>@'+un+'</a></span>';
 								z += linkify(item.text,type);
 								if(o.images != '' && item.entities.media){
-									$.each(item.entities.media, function(i,media){
+									sub$.each(item.entities.media, function(i,media){
 										z += '<a href="'+media.media_url_https+'"><img src="'+media.media_url_https+':'+o.images+'" alt="" /></a>';
 									});
 								}
@@ -614,7 +614,7 @@
 								break;
 
 								case 'pinterest':
-								var src = $('img',item.description).attr('src');
+								var src = sub$('img',item.description).attr('src');
 								y = src ? '<a href="'+q+'"><img src="'+src+'" alt="" /></a>' : '' ;
 								z = item.text;
 								st = z;
@@ -713,13 +713,13 @@
 								break;	
 								
 								case 'stumbleupon':
-								var src = $('img',item.content).attr('src');
+								var src = sub$('img',item.content).attr('src');
 								y = src != '' && feed == 'favorites' ? '<a href="'+q+'"><img src="'+src+'" alt="" /></a>' : '' ;
 								z = item.contentSnippet;
 								break;
 								
 								case 'deviantart':
-								var src = $('img',item.content).attr('src');
+								var src = sub$('img',item.content).attr('src');
 								y = src ? '<a href="'+q+'"><img src="'+src+'" alt="" /></a>' : '' ;
 								z = item.contentSnippet;
 								break;
@@ -824,7 +824,7 @@
 								s = share(st,sq,opt.twitterId);
 							}
 
-							$.each(o.out.split(','), function(i,v){
+							sub$.each(o.out.split(','), function(i,v){
 								
 								zz += v != 'intro' ? '<span class="section-'+v+'">' : '' ;
 								switch(v)
@@ -893,26 +893,26 @@
 				}
 			},
 			complete: function(){
-				var $newItems = $(list.join(''));
+				var sub$newItems = sub$(list.join(''));
 				if(opt.wall == true){
-					stream.isotope( 'insert', $newItems );
+					stream.isotope( 'insert', sub$newItems );
 					if(type == 'facebook' || type == 'pinterest' || type == 'rss' || type == 'dribbble'){
-						$('li.dcsns-'+type+' .section-thumb img',stream).css('opacity',0).show().fadeTo(800,1);
-						$('img',stream).on('load', function(){ stream.isotope('layout'); });
+						sub$('li.dcsns-'+type+' .section-thumb img',stream).css('opacity',0).show().fadeTo(800,1);
+						sub$('img',stream).on('load', function(){ stream.isotope('layout'); });
 					}
 					if(type == 'twitter'){
 						setTimeout(function(){
 							stream.isotope('layout');
 						},1000);
-						$('img',stream).on('load', function(){ stream.isotope('layout'); });
+						sub$('img',stream).on('load', function(){ stream.isotope('layout'); });
 					}
 					
 				} else {
-					stream.append($newItems);
+					stream.append(sub$newItems);
 					sortstream(stream,'asc');
 				}
 				if(type == 'flickr' && cq.length > 1){
-					flickrHrefLink(cq[1],$newItems);
+					flickrHrefLink(cq[1],sub$newItems);
 				}
 			}
 		});
@@ -928,10 +928,10 @@
 			}
 		);
 		if(type == 'twitter'){
-			text = text.replace(/(^|\s)@(\w+)/g, '$1@<a href="http://www.twitter.com/$2">$2</a>');
-			text = text.replace(/(^|\s)#(\w+)/g, '$1#<a href="http://twitter.com/search/%23$2">$2</a>');
+			text = text.replace(/(^|\s)@(\w+)/g, 'sub$1@<a href="http://www.twitter.com/sub$2">sub$2</a>');
+			text = text.replace(/(^|\s)#(\w+)/g, 'sub$1#<a href="http://twitter.com/search/%23sub$2">sub$2</a>');
 		} else if(type == 'facebook'){
-			text = text.replace(/(^|\s)#(\w+)/g, '$1#<a href="http://facebook.com/hashtag/%23$2">$2</a>');
+			text = text.replace(/(^|\s)#(\w+)/g, 'sub$1#<a href="http://facebook.com/hashtag/%23sub$2">sub$2</a>');
 		}
 		return text;
 	}
@@ -939,17 +939,17 @@
 	function cut(text,n){
 		var short = text.substr(0, n);
 		if (/^\S/.test(text.substr(n)))
-		short = short.replace(/\s+\S*$/, "");
+		short = short.replace(/\s+\S*sub$/, "");
 		return short;
 	}
 	
 	function htmlEncode(v){
-		return $('<div/>').text(v).html();
+		return sub$('<div/>').text(v).html();
 	}
 	
 	function stripHtml(v){
-		var $html = $(v);
-		return $html.text();
+		var sub$html = sub$(v);
+		return sub$html.text();
 	}
 
 	Date.prototype.setRFC3339 = function(dString){
@@ -1004,7 +1004,7 @@
 	};
 
 	function parseTwitterDate(a){
-		var out = !!navigator.userAgent.match(/Trident\/7\./) || navigator.userAgent.indexOf("MSIE")>= 0 || navigator.userAgent.indexOf("Edge")>= 0 ? a.replace(/(\+\S+) (.*)/, '$2 $1') : a ; 
+		var out = !!navigator.userAgent.match(/Trident\/7\./) || navigator.userAgent.indexOf("MSIE")>= 0 || navigator.userAgent.indexOf("Edge")>= 0 ? a.replace(/(\+\S+) (.*)/, 'sub$2 sub$1') : a ; 
 		return out;
 	}
 	
@@ -1103,9 +1103,9 @@
 		}
 		
 		function sortstream(obj,d){
-			var $l = $('li',obj);
-			$l.sort(function(a, b){
-				var keyA = parseInt($(a).attr('rel'),10), keyB = parseInt($(b).attr('rel'),10);
+			var sub$l = sub$('li',obj);
+			sub$l.sort(function(a, b){
+				var keyA = parseInt(sub$(a).attr('rel'),10), keyB = parseInt(sub$(b).attr('rel'),10);
 				if(d == 'asc'){
 					return (keyA > keyB) ? 1 : -1;
 				} else {
@@ -1113,10 +1113,10 @@
 				}
 				return 0;
 			});
-			$.each($l, function(index, row){
+			sub$.each(sub$l, function(index, row){
 				obj.append(row);
 			});
-			$('.dcsns-loading').slideUp().remove();
+			sub$('.dcsns-loading').slideUp().remove();
 			return;
 		}
 		
@@ -1130,33 +1130,33 @@
 		}
 		
 		function ticker(s,b,speed){
-			var $a = $('li:last',s),$b = $('li:first',s),$gx,bh = $b.outerHeight(true);
-			if($('li',s).not('.inactive').length > 2){
+			var sub$a = sub$('li:last',s),sub$b = sub$('li:first',s),sub$gx,bh = sub$b.outerHeight(true);
+			if(sub$('li',s).not('.inactive').length > 2){
 				if(b == 'next'){
-					$gx = $a.clone().hide();
-					$b.before($gx);
-					$a.remove();
-					if($a.hasClass('inactive')){
+					sub$gx = sub$a.clone().hide();
+					sub$b.before(sub$gx);
+					sub$a.remove();
+					if(sub$a.hasClass('inactive')){
 						ticker(s,b,speed);
 					} else {
-						$('.inner',$gx).css({opacity: 0});
-						$gx.slideDown(speed,'linear',function(){
-							$('.inner',this).animate({opacity: 1},speed);
+						sub$('.inner',sub$gx).css({opacity: 0});
+						sub$gx.slideDown(speed,'linear',function(){
+							sub$('.inner',this).animate({opacity: 1},speed);
 						});
 						return;
 					}
 				} else {
-					$gx = $b.clone();
-					if($b.hasClass('inactive')){
-						$a.after($gx);
-						$b.remove();
+					sub$gx = sub$b.clone();
+					if(sub$b.hasClass('inactive')){
+						sub$a.after(sub$gx);
+						sub$b.remove();
 						ticker(s,b,speed);
 					} else {
-						$b.animate({marginTop: -bh+'px'},speed,'linear',function(){
-							$a.after($gx);
-							$b.remove();
+						sub$b.animate({marginTop: -bh+'px'},speed,'linear',function(){
+							sub$a.after(sub$gx);
+							sub$b.remove();
 						});
-						$('.inner',$b).animate({opacity: 0},speed);
+						sub$('.inner',sub$b).animate({opacity: 0},speed);
 					}
 				}
 			}
@@ -1167,8 +1167,8 @@
 				url: 'http://api.flickr.com/services/feeds/groups_pool.gne?id='+id+'&format=json&jsoncallback=?',
 				dataType: 'jsonp',
 				success: function(a){
-					$('.icon',obj).each(function(){
-						$(this).parent().attr('href',a.link);
+					sub$('.icon',obj).each(function(){
+						sub$(this).parent().attr('href',a.link);
 					});
 				}
 			});
