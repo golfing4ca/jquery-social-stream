@@ -416,7 +416,7 @@
 			
 			case 'delicious':
 			href = 'https://www.delicious.com/'+id;
-			url = 'http://feeds.delicious.com/v2/json/'+id;
+			url = 'https://feeds.delicious.com/v2/json/'+id;
 			break;
 			
 			case 'pinterest':
