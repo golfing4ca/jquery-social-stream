@@ -1,6 +1,6 @@
 <?php
 // SET YOUR TWITTER API DETAILS HERE
-$consumer_key = "i06Z5HXbXcz2P51a6UbEmrcDq "; 
+$consumer_key = "i06Z5HXbXcz2P51a6UbEmrcDq"; 
 $consumer_secret = "flOLgM1QXImOCB1T5bVgsNwBZ5wAYyjsQH5rCq51b782Fqn0gc";
 $oauth_access_token = "	704703471862292480-aGcr6UMx4Z1fKoWlj4rc6OPJp0hzdkr"; 
 $oauth_access_token_secret = "ys71RAM7qlHMg1y4H2QLI0qEkFw4PPwBVNaesP38sWo7A";
