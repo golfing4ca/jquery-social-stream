@@ -1184,10 +1184,10 @@
         }
 })(jQuery);
 
-function loadFN( jQuery ) {
-	jQuery.getScript("//platform.twitter.com/widgets.js", function(){});
-	jQuery('.section-share a').click(function(){
-		var u = jQuery(this).attr('href');
+function loadFN( jQ$ ) {
+	jQ$.getScript("//platform.twitter.com/widgets.js", function(){});
+	jQ$('.section-share a').click(function(){
+		var u = jQ$(this).attr('href');
 		window.open(u,'sharer','toolbar=0,status=0,width=626,height=436');
 		return false;
 	});
