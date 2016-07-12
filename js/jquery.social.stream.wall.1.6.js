@@ -1310,8 +1310,8 @@ function() {
     "function" == typeof define && define.amd ? define(["outlayer/outlayer", "get-size/get-size", "matches-selector/matches-selector", "isotope/js/item", "isotope/js/layout-mode", "isotope/js/layout-modes/masonry", "isotope/js/layout-modes/fit-rows", "isotope/js/layout-modes/vertical"], r) : t.Isotope = r(t.Outlayer, t.getSize, t.matchesSelector, t.Isotope.Item, t.Isotope.LayoutMode)
   }(window);
 
-jQuery(window).load(function() {
-
+function loadFN( jQuery ) {
+	
   var filters = {},
     $container = jQuery('.stream');
 
@@ -1359,4 +1359,6 @@ jQuery(window).load(function() {
     });
     return;
   }
-});
+}
+
+$( window ).load( loadFN );
