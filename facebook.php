@@ -2,8 +2,8 @@
 // SET YOUR FACEBOOK API DETAILS HERE
 //$app_id 	= '520433021481445';
 //$app_secret = '058c60759bfdf1bae24c1220bdeb5d82';
-$app_id 	= '02e22a2656064b349e9efa3cf5be4a78';
-$app_secret = '9f7bc25958454965a34fb062fd18cf45';
+$app_id 	= '520433021481445';
+$app_secret = 'o-0ZhjcmrgQKxt-f2QHbz251BUM';
 
 // DO NOT EDIT BELOW THIS LINE
 ini_set('display_errors', '0');
